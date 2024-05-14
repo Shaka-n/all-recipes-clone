@@ -5,11 +5,11 @@ type Props = {
   cookTimeMinutes: number;
   totalTimeMinutes: number;
   servings: number;
-  yieldServings: number;
+  yields: string;
 }
 
 const RecipeDetails: React.FC<Props> = 
-   ({prepTimeMinutes, cookTimeMinutes, totalTimeMinutes, servings, yieldServings}) => {
+   ({prepTimeMinutes, cookTimeMinutes, totalTimeMinutes, servings, yields}) => {
   return (
     <div className="border-2 rounded-md border-gray-300 border-t-8 border-t-orange-400">
   <div className="grid grid-cols-3 grid-rows-2">
@@ -31,7 +31,7 @@ const RecipeDetails: React.FC<Props> =
   </div>
   <div className="p-4">
     <div className="font-bold">Yield:</div>
-    <div className="">{yieldServings} servings</div>
+    <div className="">{yields}</div>
   </div>
   </div>
   <hr/>
