@@ -1,4 +1,5 @@
 import type { MetaFunction } from "@remix-run/node";
+import {useState} from 'react';
 
 import RecipeIntro from './RecipeIntro'
 import RecipeDetails from './RecipeDetails'
@@ -13,7 +14,23 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+interface Recipe {
+  title: string;
+}
+
+interface RecipeState {
+  recipe: Recipe | null;
+  loading: boolean;
+  // error: string | null;
+}
+
 export default function Index() {
+  const [state, setState] = useState<RecipeState>({
+    recipe: null,
+    loading: true,
+  })
+  // setState({recipe: {title: "Fluffy Microwave Scrambled Eggs"}, loading: false})
+
   return (
     <div id="body" className=" max-w-2xl p-8 ml-10 flex flex-col space-y-4">
           <RecipeIntro title="Fluffy Microwave Scrambled Eggs" summary="Use your microwave to make light and fluffy scrambled eggs for a quick and easy breakfast to start your day. Follow the technique in this recipe for perfect results every time."/>
