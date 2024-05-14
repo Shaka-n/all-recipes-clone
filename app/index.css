@@ -1,0 +1,40 @@
+#body {
+  background-color: white;
+}
+.stepList {
+  counter-reset: step-counter;
+}
+.stepList li {
+  margin-bottom: 2rem;
+}
+.stepList li::before {
+  counter-increment: step-counter;
+  content: "Step " counter(step-counter);
+  font-weight: bold;
+}
+
+.stepList figure{
+  margin-bottom: 2rem;
+}
+.stepList figcaption{
+  color: gray;
+  font-size: small;
+}
+
+.stepList figcaption:before{
+  content: "PHOTO: "
+}
+
+.nutrition-facts__summary tr{
+  display: block;
+  float: left;
+  margin-right: 4rem;
+}
+
+.nutrition-facts__summary td {
+  display: block;
+}
+
+.nutrition-facts__summary td:first-child{
+  font-weight: bold;
+}
