@@ -33,9 +33,10 @@ interface Recipe {
   cookTimeMinutes: number;
   totalTimeMinutes: number;
   servings: number;
-  yieldServings: number;
+  yields: string;
   ingredients: Array<string>;
   directions: Array<Step>;
+  // TOOD: move nutrition facts into parameters
 }
 
 interface RecipeState {
@@ -44,7 +45,7 @@ interface RecipeState {
   // error: string | null;
 }
 
-const directions: Array<Step> = [
+const eggDirections: Array<Step> = [
   {text: "Gather all ingredients", 
   images: [{
     src: "https://www.allrecipes.com/thmb/8Sh854Yx4Ys7CMeSg_1dMTjXvBM=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/272293-Fluffy-Microwave-Scrambled-Eggs-mfs-STEP-001-f333435c6f174a54877c8d6cf228b2ac.jpg",
@@ -73,17 +74,41 @@ const directions: Array<Step> = [
     attr: "DOTDASH MEREDITH FOOD STUDIOS"}]
   }]
 
-const recipe1: Recipe = {
+const chimDirections: Array<Step> = [
+  {text: "Combine parsley, oil, vinegar, oregano, cumin, garlic, hot sauce, and salt in a blender or food processor. Mix on medium speed until ingredients are evenly blended, about 10 seconds.", 
+  images: [{
+    src: "https://www.allrecipes.com/thmb/ngixLJDyfzkTRcHDinDDuMlkKB4=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/1028889-80254433747e42bfb5ceaf2561f627ce.jpg",
+    attr: ""}]
+  }
+]
+
+const recipes: Array<Recipe> = [{
   title: "Fluffy Microwave Scrambled Eggs",
   summary: "Use your microwave to make light and fluffy scrambled eggs for a quick and easy breakfast to start your day. Follow the technique in this recipe for perfect results every time.",
   prepTimeMinutes: 4,
   cookTimeMinutes: 5,
   totalTimeMinutes: 10,
   servings: 2,
-  yieldServings: 3,
+  yields: "3 servings",
   ingredients: ["4 eggs", "1/4 milk", "1/8 teaspoon salt"],
-  directions: directions,
+  directions: eggDirections,
+}, 
+{
+  title: "Chimichurri Sauce",
+  summary: "This famous Argentinian chimichurri sauce is perfect for any grilled chicken, meat, or fish. My catering customers love it on garlic crostini with grilled flank steak slices.",
+  prepTimeMinutes: 5,
+  cookTimeMinutes: 0,
+  totalTimeMinutes: 12,
+  servings: 2,
+  yields: "1 1/2 cups",
+  ingredients: ["1 cup fresh parsley", "3/4 cup extra virgin olive oil", "3 tablespoons red wine vinegar", "2 tablespoons dried oregano", "2 teaspoons ground cumin", "1 1/2 teaspoons minced garlic", "1 1/2 teaspoons pepper sauce (such as Frank's Red Hot)"],
+  directions: chimDirections,
 }
+]
+
+
+
+
 
 export default function Index() {
   const [state, setState] = useState<RecipeState>({
@@ -92,7 +117,7 @@ export default function Index() {
   })
   useEffect(() => {
     const fetchRecipe = async () => {
-      setState({recipe: recipe1, loading: false})
+      setState({recipe: recipes[1], loading: false})
     }
 
     fetchRecipe();
@@ -110,7 +135,7 @@ export default function Index() {
     return (
       <div id="body" className=" max-w-2xl p-8 ml-10 flex flex-col space-y-4">
             <RecipeIntro title={recipe.title} summary={recipe.summary} />
-            <RecipeDetails prepTimeMinutes={recipe.prepTimeMinutes} cookTimeMinutes={recipe.cookTimeMinutes} totalTimeMinutes={recipe.totalTimeMinutes} servings={recipe.servings} yieldServings={recipe.yieldServings}/>
+            <RecipeDetails prepTimeMinutes={recipe.prepTimeMinutes} cookTimeMinutes={recipe.cookTimeMinutes} totalTimeMinutes={recipe.totalTimeMinutes} servings={recipe.servings} yield={recipe.yield}/>
             <RecipeIngredients ingredients={recipe.ingredients}/>
             <RecipeDirections steps={recipe.directions}/>
             <RecipeNutritionFacts/>
