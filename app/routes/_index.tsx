@@ -1,6 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
 import { useState, useEffect } from 'react';
-
+import { Link } from "@remix-run/react"
 import RecipeIntro from './RecipeIntro'
 import RecipeDetails from './RecipeDetails'
 import RecipeIngredients from './RecipeIngredients'
@@ -9,8 +9,8 @@ import RecipeNutritionFacts from './RecipeNutritionFacts'
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "SomeRecipes" },
+    { name: "description", content: "This is a clone of AllRecipes.com" },
   ];
 };
 
@@ -123,6 +123,8 @@ export default function Index() {
     fetchRecipe();
   }, [])
 
+  const topics = ["Breakfast", "Healthy Snakcks"]
+
   if(state.loading) {
     return (<div>Loading...</div>);
   } 
@@ -133,13 +135,22 @@ export default function Index() {
     return (<div>No recipe...</div>)
   } else {
     return (
-      <div id="body" className=" max-w-2xl p-8 ml-10 flex flex-col space-y-4">
-            <RecipeIntro title={recipe.title} summary={recipe.summary} />
-            <RecipeDetails prepTimeMinutes={recipe.prepTimeMinutes} cookTimeMinutes={recipe.cookTimeMinutes} totalTimeMinutes={recipe.totalTimeMinutes} servings={recipe.servings} yield={recipe.yield}/>
-            <RecipeIngredients ingredients={recipe.ingredients}/>
-            <RecipeDirections steps={recipe.directions}/>
-            <RecipeNutritionFacts/>
-          </div>
+      <div>
+        <ul>
+          {topics.map(topic => (
+          <li key={topic}>
+            <Link to={`/topics/${topic.toLowerCase()}`}>{topic}</Link>
+          </li>
+          ))}
+        </ul>
+        <div id="body" className=" max-w-2xl p-8 ml-10 flex flex-col space-y-4">
+          <RecipeIntro title={recipe.title} summary={recipe.summary} />
+          <RecipeDetails prepTimeMinutes={recipe.prepTimeMinutes} cookTimeMinutes={recipe.cookTimeMinutes} totalTimeMinutes={recipe.totalTimeMinutes} servings={recipe.servings} yields={recipe.yields}/>
+          <RecipeIngredients ingredients={recipe.ingredients}/>
+          <RecipeDirections steps={recipe.directions}/>
+          <RecipeNutritionFacts/>
+        </div>
+      </div>
     );
   }
 }
