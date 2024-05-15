@@ -38,3 +38,12 @@
 .nutrition-facts__summary td:first-child{
   font-weight: bold;
 }
+
+.nutrition-facts__details tr {
+  border-bottom: 1px solid #ddd
+}
+
+.nutrition-facts__details td {
+  padding-right: 20px;
+  margin-right: 20px;
+}
