@@ -22,6 +22,27 @@ const Summary: React.FC<SummaryProps> = ({title, summary}) => {
     )
 }
 
+const AllCard: React.FC<{}> = ({}) => {
+  return (
+    <div className="border-2 w-72">
+        <img className="mb-4 w-72" src="https://www.allrecipes.com/thmb/Uilpyf5BOpaVzScwubrllWgMhS8=/282x188/filters:no_upscale():max_bytes(150000):strip_icc():focal(479x0:481x2):format(webp)/669625-1497f7fdeb924813abb10abdb8798b1c.jpg" />
+        <div className="font-semibold tracking-widest text-gray-600 text-xs mb-2">SNACK CHIP RECIPES</div>
+        <div className="font-bold text-xl mb-4">Air Fryer Sweet Potato Chips</div>
+    </div>
+    )
+}
+
+
+const All: React.FC<{}> = ({}) => {
+    return (<div className="grid grid-cols-4 space-x-4">
+        <AllCard />
+        <AllCard />
+        <AllCard />
+        <AllCard />
+    </div>)
+}
+
+
 const FeaturedCard: React.FC<{}> = ({}) => {
     return (
         <div className="mr-8">
@@ -40,10 +61,6 @@ const Featured: React.FC<{}> = ({}) => {
     </div>)
 }
 
-
-const All : React.FC<{}> = ({}) => {
-    return (<div>many smaller boxes</div>)
-}
 
 export default function Index() {
     return (
