@@ -39,12 +39,8 @@ interface RecipeState {
 }
 
 export async function loader({params, context}: LoaderFunctionArgs) {
-  console.log(params)
-  console.log(context)
   const res = await fetch(`http://127.0.0.1:5000/api/recipe/${params.recipeId}`)
-  console.log(res)
   const recipes = await res.json()
-  console.log(recipes)
   return recipes
 }
 
