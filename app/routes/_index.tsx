@@ -106,10 +106,6 @@ const recipes: Array<Recipe> = [{
 }
 ]
 
-
-
-
-
 export default function Index() {
   const [state, setState] = useState<RecipeState>({
     recipe: null,
@@ -123,7 +119,7 @@ export default function Index() {
     fetchRecipe();
   }, [])
 
-  const topics = ["Breakfast", "Healthy Snakcks"]
+  const topics = ["Breakfast", "Healthy Snakcks", "Dinner"]
 
   if(state.loading) {
     return (<div>Loading...</div>);
@@ -143,7 +139,7 @@ export default function Index() {
           </li>
           ))}
         </ul>
-        <div id="body" className=" max-w-2xl p-8 ml-10 flex flex-col space-y-4">
+        <div id="body" className="max-w-2xl p-8 ml-10 flex flex-col space-y-4">
           <RecipeIntro title={recipe.title} summary={recipe.summary} />
           <RecipeDetails prepTimeMinutes={recipe.prepTimeMinutes} cookTimeMinutes={recipe.cookTimeMinutes} totalTimeMinutes={recipe.totalTimeMinutes} servings={recipe.servings} yields={recipe.yields}/>
           <RecipeIngredients ingredients={recipe.ingredients}/>

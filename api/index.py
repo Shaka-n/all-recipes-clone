@@ -38,6 +38,7 @@ chimDirections = [{
     "attr": ""}]}]
 
 recipes = [{
+  "id": 0,
   "title": "Fluffy Microwave Scrambled Eggs",
   "summary": "Use your microwave to make light and fluffy scrambled eggs for a quick and easy breakfast to start your day. Follow the technique in this recipe for perfect results every time.",
   "prepTimeMinutes": 4,
@@ -47,8 +48,10 @@ recipes = [{
   "yields": "3 servings",
   "ingredients": ["4 eggs", "1/4 milk", "1/8 teaspoon salt"],
   "directions": eggDirections,
+  "tags": ["breakfast", "brunch", "quick"]
 }, 
 {
+  "id": 1,
   "title": "Chimichurri Sauce",
   "summary": "This famous Argentinian chimichurri sauce is perfect for any grilled chicken, meat, or fish. My catering customers love it on garlic crostini with grilled flank steak slices.",
   "prepTimeMinutes": 5,
@@ -58,14 +61,30 @@ recipes = [{
   "yields": "1 1/2 cups",
   "ingredients": ["1 cup fresh parsley", "3/4 cup extra virgin olive oil", "3 tablespoons red wine vinegar", "2 tablespoons dried oregano", "2 teaspoons ground cumin", "1 1/2 teaspoons minced garlic", "1 1/2 teaspoons pepper sauce (such as Frank's Red Hot)"],
   "directions": chimDirections,
+  "tags": ["dinner", "lunch", "grilling"]
 }]
 
-
-
 @app.route("/api/recipe/<int:recipe_id>")
-def getRecipeById(recipe_id):
-  return recipes[recipe_id]
+def getRecipeByTitle(recipe_id):
+  recipe = [recipe for recipe in recipes if recipe["id"] == recipe_id]
+  if len(recipe) == 1:
+    return recipe[0]
+  else:
+    return 404
+
+# @app.route("/api/recipe/<string:recipe_title>")
+# def getRecipeByTitle(recipe_title):
+#   for recipe in recipes:
+#     if recipe["title"] == recipe_title:
+#       return recipe
+#     else:
+#       return 404
+
 
 @app.route("/api/recipe/topic/<string:topic_name>")
-def getRecipesByTopic(topic):
-  return recipes
+def getRecipesByTopic(topic_name):
+  topic_recipes = {"topic": topic_name, "recipes": []}
+  for recipe in recipes:
+    if topic_name in recipe["tags"]:
+      topic_recipes["recipes"].append({"id": recipe["id"], "title": recipe["title"]})
+  return topic_recipes

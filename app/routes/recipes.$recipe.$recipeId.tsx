@@ -18,7 +18,8 @@ type Step = {
 }
 
 
-interface Recipe {
+export interface Recipe {
+  id: number,
   title: string;
   summary: string;
   prepTimeMinutes: number;
@@ -37,16 +38,20 @@ interface RecipeState {
   // error: string | null;
 }
 
-export async function loader(params: LoaderFunctionArgs) {
-  const res = await fetch("http://127.0.0.1:5000/api/recipe/0")
+export async function loader({params, context}: LoaderFunctionArgs) {
+  console.log(params)
+  console.log(context)
+  const res = await fetch(`http://127.0.0.1:5000/api/recipe/${params.recipeId}`)
+  console.log(res)
   const recipes = await res.json()
+  console.log(recipes)
   return recipes
 }
 
 export default function Recipe(){
   const recipe = useLoaderData<typeof loader>()
   return(
-    <div>
+    <div className="max-w-2xl p-8 ml-10 flex flex-col space-y-4">
       <RecipeIntro title={recipe.title} summary={recipe.summary} />
       <RecipeDetails prepTimeMinutes={recipe.prepTimeMinutes} cookTimeMinutes={recipe.cookTimeMinutes} totalTimeMinutes={recipe.totalTimeMinutes} servings={recipe.servings} yields={recipe.yields}/>
       <RecipeIngredients ingredients={recipe.ingredients}/>
