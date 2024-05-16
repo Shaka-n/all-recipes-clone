@@ -72,15 +72,6 @@ def getRecipeByTitle(recipe_id):
   else:
     return 404
 
-# @app.route("/api/recipe/<string:recipe_title>")
-# def getRecipeByTitle(recipe_title):
-#   for recipe in recipes:
-#     if recipe["title"] == recipe_title:
-#       return recipe
-#     else:
-#       return 404
-
-
 @app.route("/api/recipe/topic/<string:topic_name>")
 def getRecipesByTopic(topic_name):
   topic_recipes = {"topic": topic_name, "recipes": []}
