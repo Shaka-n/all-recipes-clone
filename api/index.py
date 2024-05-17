@@ -64,13 +64,16 @@ recipes = [{
   "tags": ["dinner", "lunch", "grilling"]
 }]
 
-@app.route("/api/recipe/<int:recipe_id>")
+@app.route("/api/recipe/<int:recipe_id>", methods=['GET', 'POST'])
 def getRecipeByTitle(recipe_id):
-  recipe = [recipe for recipe in recipes if recipe["id"] == recipe_id]
-  if len(recipe) == 1:
-    return recipe[0]
+  if request.method == 'POST':
+    return 200
   else:
-    return 404
+    recipe = [recipe for recipe in recipes if recipe["id"] == recipe_id]
+    if len(recipe) == 1:
+      return recipe[0]
+    else:
+      return 404
 
 @app.route("/api/recipe/topic/<string:topic_name>")
 def getRecipesByTopic(topic_name):
