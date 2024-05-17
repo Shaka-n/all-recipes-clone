@@ -1,36 +1,41 @@
-# Welcome to Remix + Vite!
+# Remix Setup:
 
-📖 See the [Remix docs](https://remix.run/docs) and the [Remix Vite docs](https://remix.run/docs/en/main/guides/vite) for details on supported features.
+## install runtime dependencies
+npm i @remix-run/node @remix-run/react @remix-run/serve isbot@4 react react-dom
 
-## Development
-
-Run the Vite dev server:
+## install dev dependencies
+npm i -D @remix-run/dev vite
+Run the remix app:
 
 ```shellscript
 npm run dev
 ```
 
-## Deployment
+# Flask Server Setup
+In short, you need python3
 
-First, build your app for production:
+## Prerequisites (MacOS)
+- Homebrew
 
-```sh
-npm run build
+### Install Python3
+```shellscript
+brew install python
+```
+Make sure you have python 3.8 or newer
+
+## Create and Activate Virtual Python Env
+```shellscript
+cd "~/all-recipes-clone/"
+python3 -m venv .venv
+. .venv/bin/activate
+```
+## Install Flask
+```shellscript
+pip install Flask
+```
+## Run the Flask server
+```shellscript
+flask --app api/index.py run 
 ```
 
-Then run the app in production mode:
 
-```sh
-npm start
-```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-- `build/server`
-- `build/client`
