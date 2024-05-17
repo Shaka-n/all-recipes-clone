@@ -1,3 +1,4 @@
+import type { ActionFunctionArgs } from "@remix-run/node";
 import type { MetaFunction } from "@remix-run/node";
 import { useState, useEffect } from 'react';
 import { Link } from "@remix-run/react"
@@ -13,9 +14,13 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export const action = async () => {
-  // call backend create
-  return json({})
+export const action = async ({
+  params,
+  request,
+}: ActionFunctionArgs) => {
+    const formData = await request.formData();
+    const updates = Object.fromEntries(formData);
+    return json({"title": updates.title})
 }
 
 export default function Index() {
