@@ -4,12 +4,12 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  json,
 } from "@remix-run/react";
 
 import type { LinksFunction } from "@remix-run/node";
 import tailwind from "~/tailwind.css?url";
 import stylesheet from "~/index.css?url";
-
 
 
 export const links: LinksFunction = () => [
