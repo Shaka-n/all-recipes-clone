@@ -12,6 +12,7 @@ import stylesheet from "~/index.css?url";
 
 
 
+
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: tailwind },
   { rel: "stylesheet", href: stylesheet},

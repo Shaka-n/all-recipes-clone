@@ -119,7 +119,7 @@ export default function Index() {
     fetchRecipe();
   }, [])
 
-  const topics = ["Breakfast", "Healthy Snakcks", "Dinner"]
+  const topics = ["Breakfast", "Healthy Snacks", "Dinner"]
 
   if(state.loading) {
     return (<div>Loading...</div>);
@@ -132,19 +132,16 @@ export default function Index() {
   } else {
     return (
       <div>
-        <ul>
-          {topics.map(topic => (
-          <li key={topic}>
-            <Link to={`/topics/${topic.toLowerCase()}`}>{topic}</Link>
-          </li>
-          ))}
-        </ul>
-        <div id="body" className="max-w-2xl p-8 ml-10 flex flex-col space-y-4">
-          <RecipeIntro title={recipe.title} summary={recipe.summary} />
-          <RecipeDetails prepTimeMinutes={recipe.prepTimeMinutes} cookTimeMinutes={recipe.cookTimeMinutes} totalTimeMinutes={recipe.totalTimeMinutes} servings={recipe.servings} yields={recipe.yields}/>
-          <RecipeIngredients ingredients={recipe.ingredients}/>
-          <RecipeDirections steps={recipe.directions}/>
-          <RecipeNutritionFacts/>
+        <div className="mx-80 mt-4 flex space-x-8">
+          <div className="text-orange-500">somerecipes</div>
+          <nav className="flex space-x-4">
+            {topics.map(topic => (
+              <Link className="" to={`/topics/${topic.toLowerCase()}`}>{topic}</Link>
+            ))}
+          </nav>
+          <div className="w-96"> <form ><input type="text" name="query" className="w-72" placeholder="Find a recipe or search by ingredient"></input></form></div>
+          <div>
+        </div>
         </div>
       </div>
     );
